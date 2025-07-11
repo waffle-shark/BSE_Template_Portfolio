@@ -56,15 +56,43 @@ Here's where you'll put images of your schematics. [Tinkercad](https://www.tinke
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
 
 ```c++
-void setup() {
-  // put your setup code here, to run once:
+#include <arduinoFFT.h>
+#include <MD_MAX72xx.h>
+#include <SPI.h>
+float sensitivity = 4.9; 
+MD_MAX72XX disp = MD_MAX72XX(MD_MAX72XX::FC16_HW, 10, 4);
+arduinoFFT FFT = arduinoFFT();
+double realComponent[64];
+double imagComponent[64];
+int spectralHeight[] = {0b00000000,0b10000000,0b11000000,
+                        0b11100000,0b11110000,0b11111000,
+                        0b11111100,0b11111110,0b11111111};
+int index, c, value;
+void setup()
+{
+  disp.begin();
   Serial.begin(9600);
-  Serial.println("Hello World!");
 }
-
-void loop() {
-  // put your main code here, to run repeatedly:
-
+void loop()
+{
+  Serial.println (analogRead(A6));
+  for(int i=0; i<64; i++)
+  {
+    realComponent[i] = analogRead(A0)/sensitivity;
+    imagComponent[i] = 0;
+  }
+  FFT.Windowing(realComponent, 64, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
+  FFT.Compute(realComponent, imagComponent, 64, FFT_FORWARD);
+  FFT.ComplexToMagnitude(realComponent, imagComponent, 64);
+  for(int i=0; i<32; i++)
+  {
+    realComponent[i] = constrain(realComponent[i],0,80);
+    realComponent[i] = map(realComponent[i],0,80,0,8);
+    index = realComponent[i];
+    value = spectralHeight[index];
+    c = 31 - i;
+    disp.setColumn(c, value);
+  }
 }
 ```
 
