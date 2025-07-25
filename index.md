@@ -34,7 +34,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mKDgi6pT2Xo" title="Harini P Milestone 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+<br>
 Since my second milestone, I've figured out my modification. My modicfication is that the bars will be relfected over a line in the center of the display, and the louder portions will be red and the quieter parts will be blue. A challenge that I faced while working toward my modification, was that I was orginally planning to use a rainbow LED display. After some extra research, we figured out that the display was unable to be supported by my Arduino due to power issues. So, we had to find an entirely new way to display the Audio visualizer. So, we decided to use a TFT LCD display. It's liek a mini phone screen, which made it easier. I also had to code for a part I didn't have on hand, which was challenging at first, but ended up working out as I did not need to debug anything! A challenge I am facing right now, though, is that the rate at which the frames of the bars are changing is too slow. It often gets stuck at one place. So, before my final milestone, my goal is to fix the frames so they move somewhat smoothly.
 
 # First Milestone
