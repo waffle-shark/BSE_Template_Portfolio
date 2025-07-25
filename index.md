@@ -5,8 +5,6 @@ My project, the Audio Visualizer, was an interesting project that had challenges
 |:--:|:--:|:--:|:--:|
 | Harini P | West High School | Software Engineering | Incoming Freshman
 
-**Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
-
 ![Headstone Image](harini-portfolio-pic.jpg)
   
 # Final Milestone
