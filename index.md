@@ -102,6 +102,7 @@ void loop() {
 ```
 
 # Bill of Materials
+
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
 | Bewinner 1.8inch LCD Display Module, TFT Screen Module | Displaying the bars | $8.99 | <a href="https://www.amazon.com/Bewinner-Resolution-Interface-Full-Color-Controller/dp/B083NYBN4Q?crid=12S2ZGBOVSY5H&dib=eyJ2IjoiMSJ9.fyDKEDaZ-SyYFjeeQWmIjKWSAgGv-rWQCzs6OfFR8Y7okFbQSezTTtBCWPs1wzE6a1V_QVDZ1E99UO7Tp9eEm1IuW8Ngh2twohn67HUODXx5IwdpR1JoKbwx3zTkfhnZvQzP4BeW9n0xwkcrFOm3cEV4tJC7GCgrMZ7uqLtYkB-NkikdItOMrXx0i7WK4QpT5xV1cRUsk_-5BveME4UV_09UUJHAzju6gYxvLkfTKrvBa7_bI6ddOxaA__-5kIZ_NXvnLdbZk170u6G9DcvXosexiuo-iM-fPlQr9ABYJq0.FNCMjCtO3RvX36toQqV2QU9O40AlQIUzNOcba9rDbGM&dib_tag=se&keywords=ST7735+TFT&qid=1752499772&s=electronics&sprefix=st7735+tft%2Celectronics%2C114&sr=1-3"> Link </a> |
