@@ -20,14 +20,9 @@ You should comment out all portions of your portfolio that you have not complete
 **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="1236" height="695" src="https://www.youtube.com/embed/XrU3acGw_BY" title="Harini P Milestone 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-For your final milestone, explain the outcome of your project. Key details to include are:
-- What you've accomplished since your previous milestone
-- What your biggest challenges and triumphs were at BSE
-- A summary of key topics you learned about
-- What you hope to learn in the future after everything you've learned at BSE
-
-
+<br>
+Since milestone 2, I've worked around my error succesfully. The screen is now fully reacting to all sound smoothly.  Instead of drawing rectangles for each bar, which was slow, I instead drew 2 verticle lines for them. The bars were being drawn faster, but they still weren't going away. To solve that issue, I drew two black lines over the bars to seemingly erase them before the new ones came in, fixing the error completely. My biggest challenge at BSE was probably this error. Before solving it, I was thinking about just switching back to the LED Matrix. Thankfully, I pushed on, leading me into one of my triumphs: fixing the error! My other triumph was being able to code for the TFT LCD display without even having it on hand! Luckily for me, I didn't need to do much debugging, only fixing the frozen screen! 
+Over my time at BSE, I learned many new things about audio. I've learned about the Fast Fourier Transform (FFT), which is a method that breaks down sound into smaller pieces and analyzes their frequencies. I also learned more about frequencies annd a little about PWM (Pulse Width Modulation) which is a technique that controls the amount of power delivered to a device by varying the duration of pulses in a signal. After BSE, I hope to be able to continue exploring about audio in general, as it interests me a lot. 
 
 # Second Milestone
 
@@ -42,60 +37,83 @@ Since my second milestone, I've figured out my modification. My modicfication is
 **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZzvixJHYUk0" title="Harini P Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+<br>
 My project is a DIY audio visualizer using an Arduino Nano, a 32×8 MAX7219 LED matrix, and a microphone module. The goal is to capture live audio, analyze it using the Fast Fourier Transform (FFT), and display the sound frequencies as moving bars on the LED matrix. The Arduino reads analog sound data from a microphone connected to pin A0 and uses the arduinoFFT library to convert that sound into its frequency components. These frequency values are then mapped to visual bar heights, which are displayed in real-time on the LED matrix using the MD_MAX72XX library. One of the challenges I faced was fine-tuning sensitivity for my environment. Thankfull, I found the optimal sensitivity (4.9). The other challenge that I am facing is that there seem to be 2 filled bars at the left hand side of my matrix. They are due to other noises that my mic is picking up. I would like to resolve this issue moving forward. I also plan to explore more visual effects and possibly expand to a color LED matrix for a cooler look. 
 
 # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
 
 # Code
-Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
-
 ```c++
 #include <arduinoFFT.h>
-#include <MD_MAX72xx.h>
 #include <SPI.h>
-float sensitivity = 4.9; 
-MD_MAX72XX disp = MD_MAX72XX(MD_MAX72XX::FC16_HW, 10, 4);
+#include <Adafruit_GFX.h>
+#include <Adafruit_ST7735.h>
+
+#define TFT_CS     10
+#define TFT_RST    8
+#define TFT_DC     9
+
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 arduinoFFT FFT = arduinoFFT();
-double realComponent[64];
-double imagComponent[64];
-int spectralHeight[] = {0b00000000,0b10000000,0b11000000,
-                        0b11100000,0b11110000,0b11111000,
-                        0b11111100,0b11111110,0b11111111};
-int index, c, value;
-void setup()
-{
-  disp.begin();
-  Serial.begin(9600);
+
+double vReal[64];
+double vImag[64];
+float sensitivity = 2;
+
+void setup() {
+  tft.initR(INITR_BLACKTAB);
+  tft.setRotation(3);
+  tft.fillScreen(ST77XX_BLACK);
 }
-void loop()
-{
-  Serial.println (analogRead(A6));
-  for(int i=0; i<64; i++)
-  {
-    realComponent[i] = analogRead(A0)/sensitivity;
-    imagComponent[i] = 0;
+
+void loop() {
+  for (int i = 0; i < 64; i++) {
+    vReal[i] = analogRead(A0) / sensitivity;
+    vImag[i] = 0;
   }
-  FFT.Windowing(realComponent, 64, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
-  FFT.Compute(realComponent, imagComponent, 64, FFT_FORWARD);
-  FFT.ComplexToMagnitude(realComponent, imagComponent, 64);
-  for(int i=0; i<32; i++)
-  {
-    realComponent[i] = constrain(realComponent[i],0,80);
-    realComponent[i] = map(realComponent[i],0,80,0,8);
-    index = realComponent[i];
-    value = spectralHeight[index];
-    c = 31 - i;
-    disp.setColumn(c, value);
+
+  FFT.Windowing(vReal, 64, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
+  FFT.Compute(vReal, vImag, 64, FFT_FORWARD);
+  FFT.ComplexToMagnitude(vReal, vImag, 64);
+
+  for (int i = 0; i < 32; i++) {
+    vReal[i] = constrain(vReal[i], 0, 80);
+    int h = map(vReal[i], 0, 64, 0, 64);
+    int limit = 32;
+    int quietHeight = min(h, limit);
+    int loudHeight = max(h - limit, 0);
+    int x = i * 5;
+
+    // Only draw 2 lines (centered in each 5px-wide bar)
+    int barX = x + 1;
+
+    // === TOP ===
+    // Clear (black) from top to just above the active line
+    tft.drawFastVLine(barX, 0, 64 - h, ST77XX_BLACK);
+
+    // Draw quiet + loud lines
+    tft.drawFastVLine(barX, 64 - quietHeight, quietHeight, ST77XX_RED);
+    tft.drawFastVLine(barX, 64 - h, loudHeight, ST77XX_BLUE);
+
+    // === BOTTOM ===
+    // Clear (black) from bottom up to below the active line
+    tft.drawFastVLine(barX, 64 + h, 128 - (64 + h), ST77XX_BLACK);
+
+    // Draw mirrored quiet + loud lines
+    tft.drawFastVLine(barX, 64, quietHeight, ST77XX_RED);
+    tft.drawFastVLine(barX, 64 + quietHeight, loudHeight, ST77XX_BLUE);
+
+    tft.drawFastVLine(1,0,128 , ST77XX_BLACK);
+    tft.drawFastVLine(6,0,128 , ST77XX_BLACK);
   }
+
+  delay(5);
 }
+
 ```
 
 # Bill of Materials
-Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
-Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. 
-
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
 | Bewinner 1.8inch LCD Display Module, TFT Screen Module | Displaying the bars | $8.99 | <a href="https://www.amazon.com/Bewinner-Resolution-Interface-Full-Color-Controller/dp/B083NYBN4Q?crid=12S2ZGBOVSY5H&dib=eyJ2IjoiMSJ9.fyDKEDaZ-SyYFjeeQWmIjKWSAgGv-rWQCzs6OfFR8Y7okFbQSezTTtBCWPs1wzE6a1V_QVDZ1E99UO7Tp9eEm1IuW8Ngh2twohn67HUODXx5IwdpR1JoKbwx3zTkfhnZvQzP4BeW9n0xwkcrFOm3cEV4tJC7GCgrMZ7uqLtYkB-NkikdItOMrXx0i7WK4QpT5xV1cRUsk_-5BveME4UV_09UUJHAzju6gYxvLkfTKrvBa7_bI6ddOxaA__-5kIZ_NXvnLdbZk170u6G9DcvXosexiuo-iM-fPlQr9ABYJq0.FNCMjCtO3RvX36toQqV2QU9O40AlQIUzNOcba9rDbGM&dib_tag=se&keywords=ST7735+TFT&qid=1752499772&s=electronics&sprefix=st7735+tft%2Celectronics%2C114&sr=1-3"> Link </a> |
@@ -107,5 +125,3 @@ One of the best parts about Github is that you can view how other people set up 
 - [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
 - [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
 - [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
-
-To watch the BSE tutorial on how to create a portfolio, click here.
