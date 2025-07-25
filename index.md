@@ -29,8 +29,6 @@ Since my second milestone, I've figured out my modification. My modicfication is
 My project is a DIY audio visualizer using an Arduino Nano, a 32×8 MAX7219 LED matrix, and a microphone module. The goal is to capture live audio, analyze it using the Fast Fourier Transform (FFT), and display the sound frequencies as moving bars on the LED matrix. The Arduino reads analog sound data from a microphone connected to pin A0 and uses the arduinoFFT library to convert that sound into its frequency components. These frequency values are then mapped to visual bar heights, which are displayed in real-time on the LED matrix using the MD_MAX72XX library. One of the challenges I faced was fine-tuning sensitivity for my environment. Thankfull, I found the optimal sensitivity (4.9). The other challenge that I am facing is that there seem to be 2 filled bars at the left hand side of my matrix. They are due to other noises that my mic is picking up. I would like to resolve this issue moving forward. I also plan to explore more visual effects and possibly expand to a color LED matrix for a cooler look. 
 
 # Schematics 
-Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
-
 ![Headstone Image](schematic-audio-visualizer.jpg)
 
 # Code
@@ -109,9 +107,3 @@ void loop() {
 | Bewinner 1.8inch LCD Display Module, TFT Screen Module | Displaying the bars | $8.99 | <a href="https://www.amazon.com/Bewinner-Resolution-Interface-Full-Color-Controller/dp/B083NYBN4Q?crid=12S2ZGBOVSY5H&dib=eyJ2IjoiMSJ9.fyDKEDaZ-SyYFjeeQWmIjKWSAgGv-rWQCzs6OfFR8Y7okFbQSezTTtBCWPs1wzE6a1V_QVDZ1E99UO7Tp9eEm1IuW8Ngh2twohn67HUODXx5IwdpR1JoKbwx3zTkfhnZvQzP4BeW9n0xwkcrFOm3cEV4tJC7GCgrMZ7uqLtYkB-NkikdItOMrXx0i7WK4QpT5xV1cRUsk_-5BveME4UV_09UUJHAzju6gYxvLkfTKrvBa7_bI6ddOxaA__-5kIZ_NXvnLdbZk170u6G9DcvXosexiuo-iM-fPlQr9ABYJq0.FNCMjCtO3RvX36toQqV2QU9O40AlQIUzNOcba9rDbGM&dib_tag=se&keywords=ST7735+TFT&qid=1752499772&s=electronics&sprefix=st7735+tft%2Celectronics%2C114&sr=1-3"> Link </a> |
 | ELEGOO UNO R3 Project Most Complete Starter Kit | Used the arduino, wires, breadboard | $59.99 | <a href="https://www.amazon.com/EL-KIT-001-Project-Complete-Starter-Tutorial/dp/B01CZTLHGE/ref=sr_1_1_sspa?crid=2660U55Y4R0BQ&dib=eyJ2IjoiMSJ9.-TMWe7jTY1L2k9FBx9xn49qwFiVQDbHTh9labdWt--hedwkviIJguyezw59BW6r90ocCa4MEtGLi56YYbLjLLzufLJsiRGHx4fL574GMTqedpFL0DJiXW0naRr3GAqJJmM41oVgH0HZxcTAeCaD_2sXXTOliSzkPmxPHG2SKI-GSnG906aa5ey_ea7BF6XossbZJkRT0-NLuuJ5MKADgXfW8PJcmfs-fOio56KSPLOvjNhGF5LTXZyWIv13zuWcY3fmPN3MIp79sS0stz47wQDDnndnCJfLeMAujrGr_13U.OrzmQdKGXHvOifiPbKLaUI-t0BpSMIAR9yIRS2cvSu8&dib_tag=se&keywords=the%2Bmost%2Bcomplete%2Bstart%2Bkit%2Barduino%2Buno%2Belegoo&qid=1753460091&s=electronics&sprefix=the%2Bmost%2Bcomplete%2Bstart%2Bkit%2Barduino%2Buno%2Belegoo%2Celectronics%2C145&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1"> Link </a> |
 | Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-
-# Other Resources/Examples
-One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
-- [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
-- [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
-- [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
