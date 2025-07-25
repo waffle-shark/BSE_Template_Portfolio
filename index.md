@@ -1,11 +1,5 @@
 # Audio Visualizer
-Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!
-
-You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
-```HTML 
-<!--- This is an HTML comment in Markdown -->
-<!--- Anything between these symbols will not render on the published site -->
-```
+My project, the Audio Visualizer, was an interesting project that had challenges. I had to switch displays because of power issues, but in the end, I have no regrets. The project has a display which shows the audio visualizer bars on the screen, in live reaction to music or sound. It’s really satisfying to see the visuals respond instantly to changes in the audio, bringing the sound to life in a new way.
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
@@ -17,8 +11,6 @@ You should comment out all portions of your portfolio that you have not complete
   
 # Final Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
 <iframe width="1236" height="695" src="https://www.youtube.com/embed/XrU3acGw_BY" title="Harini P Milestone 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <br>
 Since milestone 2, I've worked around my error succesfully. The screen is now fully reacting to all sound smoothly.  Instead of drawing rectangles for each bar, which was slow, I instead drew 2 verticle lines for them. The bars were being drawn faster, but they still weren't going away. To solve that issue, I drew two black lines over the bars to seemingly erase them before the new ones came in, fixing the error completely. My biggest challenge at BSE was probably this error. Before solving it, I was thinking about just switching back to the LED Matrix. Thankfully, I pushed on, leading me into one of my triumphs: fixing the error! My other triumph was being able to code for the TFT LCD display without even having it on hand! Luckily for me, I didn't need to do much debugging, only fixing the frozen screen! 
@@ -26,15 +18,11 @@ Over my time at BSE, I learned many new things about audio. I've learned about t
 
 # Second Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mKDgi6pT2Xo" title="Harini P Milestone 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <br>
 Since my second milestone, I've figured out my modification. My modicfication is that the bars will be relfected over a line in the center of the display, and the louder portions will be red and the quieter parts will be blue. A challenge that I faced while working toward my modification, was that I was orginally planning to use a rainbow LED display. After some extra research, we figured out that the display was unable to be supported by my Arduino due to power issues. So, we had to find an entirely new way to display the Audio visualizer. So, we decided to use a TFT LCD display. It's liek a mini phone screen, which made it easier. I also had to code for a part I didn't have on hand, which was challenging at first, but ended up working out as I did not need to debug anything! A challenge I am facing right now, though, is that the rate at which the frames of the bars are changing is too slow. It often gets stuck at one place. So, before my final milestone, my goal is to fix the frames so they move somewhat smoothly.
 
 # First Milestone
-
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZzvixJHYUk0" title="Harini P Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <br>
